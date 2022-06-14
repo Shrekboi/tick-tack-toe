@@ -25,6 +25,8 @@ restartButton.addEventListener("click", () => {
   }
 })
 
+let times = 0;
+
 cells.forEach(cell => {
   cell.addEventListener("click", () => {
     if (cell.textContent == "" && gameOver !== true) {
@@ -38,6 +40,19 @@ cells.forEach(cell => {
         currentMark = "x"
         xTurn()
       }
+      times++;
+
+      // for (let i = 0; i <= cells.length; i++) {
+      //   if (cells[i].textContent !== "") {
+      //     times++;
+      //     console.log(times)
+      //   }
+      //   if (times === 9) {
+      //     Draw()
+      //   }
+      // }
+      
+
       checkGame();
       }
   })
@@ -46,7 +61,11 @@ cells.forEach(cell => {
 
 function checkGame () {
 
-  //HORIZONTAL CHECK
+  if (times == 9) {
+    Draw()
+  }
+  else {
+    //HORIZONTAL CHECK
   if (cells[0].textContent == "x" && cells[1].textContent == "x" && cells[2].textContent == "x") {
     winningColors(0,1,2)
     xWin()
@@ -122,6 +141,14 @@ function checkGame () {
     oWin()
   }
 
+  // else {
+  //   Draw()
+  // }
+
+  }
+
+  
+
 }
 
 function winningColors(a,b,c) {
@@ -140,3 +167,10 @@ function oWin() {
   gameStatus.textContent = "o wins the game"
   gameOver = true
 }
+
+function Draw() {
+  gameStatus.textContent = "draw"
+  gameOver = true
+}
+
+
